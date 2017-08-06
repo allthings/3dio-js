@@ -6,7 +6,8 @@ var defaults = Object.freeze({
   logLevel:      'warn',
   servicesUrl:   'https://spaces.archilogic.com/api/v2',
   storageDomain: 'storage.3d.io',
-  storageDomainNoCdn: 'storage-nocdn.3d.io'
+  storageDomainNoCdn: 'storage-nocdn.3d.io',
+  publishableKey: getPublishableKeyFromLibUrl()
 })
 
 // constants
@@ -71,6 +72,13 @@ function setLogLevel (val) {
     }
     console.error(errorMessage)
   }
+}
+
+function getPublishableKeyFromLibUrl () {
+  var libUrl = document.currentScript.getAttribute('src')
+  var keySearch = /publishableKey=([^&]+)/i.exec(libUrl)
+  if (!keySearch) return null
+  return keySearch[1]
 }
 
 // init
