@@ -77,8 +77,7 @@ function setLogLevel (val) {
 function getPublishableKeyFromLibUrl () {
   var libUrl = document.currentScript.getAttribute('src')
   var keySearch = /publishableKey=([^&]+)/i.exec(libUrl)
-  if (!keySearch) return null
-  return keySearch[1]
+  return keySearch ? keySearch[1] : null
 }
 
 // init
